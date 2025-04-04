@@ -1,0 +1,15 @@
+/* layout.module.css */
+
+.header {
+    background-color: #94c2db;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .nav {
+    margin-top: 10px;
+  }
+  

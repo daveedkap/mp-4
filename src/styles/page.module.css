@@ -1,0 +1,28 @@
+/* page.module.css */
+
+.container {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .card {
+    border: 1px solid #0761e9;
+    padding: 1rem;
+    width: calc(33% - 2rem);
+  }
+  
+  .image {
+    width: 100%;
+  }
+  

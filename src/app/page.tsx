@@ -1,5 +1,6 @@
+// src/app/page.tsx
 import Link from 'next/link';
-import { StyledDiv, Card, CardImage } from '../styles/page-style'
+import styles from '../styles/page.module.css';
 
 interface ArtObject {
   id: string;
@@ -11,7 +12,7 @@ async function getArtObjects() {
   const apiKey = process.env.HARVARD_API_KEY;
   const res = await fetch(`https://api.harvardartmuseums.org/object?apikey=${apiKey}&size=10`);
   if (!res.ok) {
-    throw new Error('Failed to fetch data from Harvard Art Museums API'); // throw error if api is down/other error related to API
+    throw new Error('Failed to fetch data from Harvard Art Museums API'); // Error handling
   }
   const data = await res.json();
   return data.records as ArtObject[];
@@ -23,29 +24,30 @@ export default async function Home() {
     artObjects = await getArtObjects();
   } catch (error) {
     console.error(error);
-    return <div>Error fetching art objects. Please try again later.</div>;
+    return <div>Error fetching art objects. Please try again later.</div>; // Throw error handle
   }
 
   return (
-    <div>
-      <h2>Art Objects</h2>
-      <StyledDiv>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Art Objects</h2>
+      <div className={styles.grid}>
         {artObjects.map((object) => (
-          <Card key={object.id}>
+          <div className={styles.card} key={object.id}>
             <h3>
               <Link href={`/${object.id}`}>
                 {object.title}
               </Link>
             </h3>
             {object.primaryimageurl && (
-              <CardImage
+              <img
+                className={styles.image}
                 src={`${object.primaryimageurl}?width=150&height=150`}
                 alt={object.title}
               />
             )}
-          </Card>
+          </div>
         ))}
-      </StyledDiv>
+      </div>
     </div>
   );
 }
